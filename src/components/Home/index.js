@@ -11,11 +11,11 @@ const Home = () => {
     const nameArray = ['h', 'r', 'i', 's']
     const jobArray = ['w', 'e', 'b', ' ', 'd', 'e', 'v', 'e', 'l', 'o', 'p', 'e', 'r', '.',]
 
-    // useEffect(() => {
-    //     return setTimeout(() => {
-    //       setLetterClass('text-animate-hover')
-    //     }, 4000)
-    //   }, [])
+    useEffect(() => {
+      return () => setTimeout(() => {
+        setLetterClass('text-animate-hover')
+      }, 4000)
+    }, [])
     
       return (
         <>
@@ -29,7 +29,7 @@ const Home = () => {
                 <span className={`${letterClass} _14`}>'m </span>
                 <img
                   src={LogoTitle}
-                  alt="JavaScript Developer Name, Web Developer Name"
+                  alt="Name"
                 />
                 <AnimatedLetters
                   letterClass={letterClass}
@@ -43,14 +43,14 @@ const Home = () => {
                   idx={22}
                 />
               </h1>
-              <h2>Front End Developer / JavaScript / React</h2>
+              <h2>Front End / JavaScript / React</h2>
               <Link to="/contact" className="flat-button">
                 CONTACT ME
               </Link>
             </div>
             <Logo />
           </div>
-          <Loader type="pacman"/>
+          <Loader type="ball-zig-zag-deflect"/>
         </>
       )
     }

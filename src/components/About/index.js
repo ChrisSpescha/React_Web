@@ -3,9 +3,9 @@ import AnimatedLetters from '../AnimatedLetters'
 import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faAngular,
+  faPython,
   faCss3,
-  faGitAlt,
+  faGithub,
   faHtml5,
   faJsSquare,
   faReact,
@@ -17,11 +17,11 @@ import Loader from 'react-loaders'
 const About = () => {
     const [letterClass, setLetterClass] = useState('text-animate')
 
-    // useEffect(() => {
-    // return setTimeout(() => {
-    //     setLetterClass('text-animate-hover')
-    // }, 3000)
-    // }, [])
+    useEffect(() => {
+    return () => setTimeout(() => {
+        setLetterClass('text-animate-hover')
+    }, 3000)
+    }, [])
 
     return (
         <>
@@ -29,6 +29,7 @@ const About = () => {
             <div className='text-zone'>
                 <h1>
                     <AnimatedLetters
+                        letterClass={letterClass}
                         strArray={['A', 'b', 'o', 'u', 't', '', 'm', 'e']}
                         idx={15}
                     />
@@ -38,14 +39,14 @@ const About = () => {
                     introduced to programming I noticed many parallels that highlight, and build
                     upon traits I had developed through my career. Moving forward I hope to
                     utilize those skills to work independently and collaboratively create,
-                    innovate and sustain.
+                    innovate and sustain in a new field.
                 </p>
             </div>
 
             <div className="stage-cube-cont">
                 <div className="cubespinner">
                     <div className="face1">
-                    <FontAwesomeIcon icon={faAngular} color="#DD0031" />
+                    <FontAwesomeIcon icon={faPython} color="#DD0031" />
                     </div>
                     <div className="face2">
                     <FontAwesomeIcon icon={faHtml5} color="#F06529" />
@@ -60,12 +61,12 @@ const About = () => {
                     <FontAwesomeIcon icon={faJsSquare} color="#EFD81D" />
                     </div>
                     <div className="face6">
-                    <FontAwesomeIcon icon={faGitAlt} color="#EC4D28" />
+                    <FontAwesomeIcon icon={faGithub} color="#EC4D28" />
                     </div>
                 </div>
             </div>
         </div>
-        <Loader type='pacman' />
+        <Loader type='ball-zig-zag-deflect' />;
         </>
     )
 

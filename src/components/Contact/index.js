@@ -10,11 +10,11 @@ const Contact = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
   const form = useRef()
 
-//   useEffect(() => {
-//     return setTimeout(() => {
-//       setLetterClass('text-animate-hover')
-//     }, 3000)
-//   }, [])
+  useEffect(() => {
+    return () => setTimeout(() => {
+      setLetterClass('text-animate-hover')
+    }, 3000)
+  }, [])
 
   const sendEmail = (e) => {
     e.preventDefault()
@@ -48,11 +48,6 @@ const Contact = () => {
               idx={15}
             />
           </h1>
-          <p>
-            I am interested in freelance opportunities - especially ambitious or
-            large projects. However, if you have other request or question,
-            don't hesitate to contact me using below form either.
-          </p>
           <div className="contact-form">
             <form ref={form} onSubmit={sendEmail}>
               <ul>
@@ -100,15 +95,15 @@ const Contact = () => {
           <span>SpeschaChris@gmail.com</span>
         </div>
         <div className="map-wrap">
-          <MapContainer center={[44.96366, 19.61045]} zoom={13}>
+          <MapContainer center={[41.668085, -73.931905]} zoom={13}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={[44.96366, 19.61045]}>
-              <Popup>Sloba lives here, come over for a cup of coffee :)</Popup>
+            <Marker position={[41.668085, -73.931905]}>
+              <Popup></Popup>
             </Marker>
           </MapContainer>
         </div>
       </div>
-      <Loader type="pacman" />
+      <Loader type="ball-zig-zag-deflect" />
     </>
   )
 }
