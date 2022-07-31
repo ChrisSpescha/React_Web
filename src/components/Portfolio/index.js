@@ -25,18 +25,18 @@ function TabPanel(props) {
   );
 }
 
-// TabPanel.propTypes = {
-//   children: PropTypes.node,
-//   index: PropTypes.number.isRequired,
-//   value: PropTypes.number.isRequired,
-// };
+ TabPanel.propTypes = {
+   children: PropTypes.node,
+   index: PropTypes.number.isRequired,
+   value: PropTypes.number.isRequired,
+ };
 
-// function a11yProps(index) {
-//   return {
-//     id: `simple-tab-${index}`,
-//     'aria-controls': `simple-tabpanel-${index}`,
-//   };
-// }
+ function a11yProps(index) {
+   return {
+     id: `simple-tab-${index}`,
+     'aria-controls': `simple-tabpanel-${index}`,
+   };
+ }
 
 export default function BasicTabs() {
   const defProjects = [
