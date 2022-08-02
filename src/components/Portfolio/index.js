@@ -1,110 +1,89 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
+import React from "react";
+import './index.scss'
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      id={`simple-tabpanel-${index}`}
-    >
-      {value === index && (
-        <Box>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
- TabPanel.propTypes = {
-   children: PropTypes.node,
-   index: PropTypes.number.isRequired,
-   value: PropTypes.number.isRequired,
- };
-
- function a11yProps(index) {
-   return {
-     id: `simple-tab-${index}`,
-     'aria-controls': `simple-tabpanel-${index}`,
-   };
- }
-
-export default function BasicTabs() {
-  const defProjects = [
-    {index: 0,
-    name: "Ecommerce Website",
-    tags: ['Python ', 'Flask ' , 'SQLAlchemy ', 'SQL ', 'HTML ', 'CSS '],
-    link: 'https://github.com/ChrisSpescha/EcommerceWebsite'
-    },
-    {
-    index: 1,
-    name: "Personal Website",
-    tags: ['Javascript', 'ReactJS', 'Material UI', 'React Router', 'HTML', 'CSS'],
-    link: 'https://github.com/ChrisSpescha/React_Web'
-    },
-    {
-    index: 2,  
-    name: "React Chart",
-    tags: ['Javascript', 'ReactJS', 'Axios', 'HTML', 'CSS'],
-    link: 'https://github.com/ChrisSpescha/react-chart'
+class Filter extends React.Component {
+    constructor(props) {
+      super(props);
     }
-  ]
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return (
-    
-      <Box className='container portfolio-page'>
-
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} orientation="vertical">
-            <Tab label="Item One" />
-            <Tab label="Item Two"  />
-            <Tab label="Item Three"  />
-          </Tabs>
-        </Box>
-
-        <TabPanel value={value} index={0}>
-
-          <CardContent className=''>
-            <Typography sx={{ fontSize: 24 }}  gutterBottom>
-            {defProjects[0].name}
-            </Typography>
-            <Typography>
-            Website with user, payment gateway, and messaging functionality
-            </Typography>
+    render() {
+      return (
+        <ul>
+        {/* map over the users array */}
+        {this.props.projects.map((project) => (
+          // display a <div> element with the user.name and user.type
+          // parent element needs to have a unique key
+          <div key={project.id}>
+            <p >{project.name}</p>
+            <li >{project.tags}</li>
+            <li >{project.link}</li>
             <br/>
-            <Typography variant="body2">
-            {defProjects[0].tags}
-            </Typography>
-          </CardContent>
-
-          <CardActions>
-            <Button size="small" href={defProjects[0].link}>Source</Button>
-          </CardActions>
-
-        </TabPanel>
+          </div>
+        ))}
+      </ul>
+      )
+    }
+  }
 
 
-        <TabPanel value={value} index={1}>
-          Item Two
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          Item Three
-        </TabPanel>
 
-      </Box>  
-  );
+  class Portfolio extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            projects : [
+                {index: 0,
+                name: "Ecommerce Website",
+                tags: ['Python ', 'Flask ' , 'SQLAlchemy ', 'SQL ', 'HTML ', 'CSS '],
+                link: 'https://github.com/ChrisSpescha/EcommerceWebsite'
+                },
+                {
+                index: 1,
+                name: "Personal Website",
+                tags: ['Javascript', 'ReactJS', 'Material UI', 'React Router', 'HTML', 'CSS'],
+                link: 'https://github.com/ChrisSpescha/React_Web'
+                },
+                {
+                index: 2,  
+                name: "React Chart",
+                tags: ['Javascript', 'ReactJS', 'Axios', 'HTML', 'CSS'],
+                link: 'https://github.com/ChrisSpescha/react-chart'
+                }
+            ]
+        }
+        this.handleClick = this.handleClick.bind(this);
+    }
+    filterTag(userTag) {
+      let taggedProjects = []
+      for (const element of this.state.projects) {
+        for (const tag of element.tags) {
+          if (userTag.toLowerCase() === tag.toLowerCase()) {
+            taggedProjects.push(element)
+          } 
+        }
+      }
+      return taggedProjects;
+    } 
+
+    handleClick() {
+      console.log(this.state.projects)
+        this.setState({
+            projects: this.filterTag('ReactJS') 
+        });
+    }
+
+    render() {
+      return (
+        <>
+      <div className="container porfolio-page text-zone">
+          <button onClick={this.handleClick}>Play Again</button>
+          { /* change code below this line */ }
+          <Filter projects={this.state.projects} />
+          { /* change code above this line */ }
+      </div>
+      </>
+      );
+      }   
 }
+
+export default Portfolio;
