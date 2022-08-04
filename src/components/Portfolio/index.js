@@ -1,89 +1,94 @@
-import React from "react";
-import './index.scss'
+import React, { useState } from 'react'
+function App() {
+  const defProjects = [
+    {index: 1,
+    name: "Ecommerce Website",
+    tags: [' Front End', ' Back End',' Python', ' Flask', ' SQLAlchemy', ' SQL', ' HTML', ' CSS'],
+    link: 'https://github.com/ChrisSpescha/EcommerceWebsite'
+    },
+    {
+    index: 2,
+    name: "Personal Website",
+    tags: [' Front End',' Javascript', ' ReactJS', ' Material UI', ' React Router', ' HTML', ' CSS'],
+    link: 'https://github.com/ChrisSpescha/React_Web'
+    },
+    {
+    index: 3,  
+    name: "React Chart",
+    tags: [' Front End',' Javascript', ' ReactJS', ' Axios', ' HTML', ' CSS'],
+    link: 'https://github.com/ChrisSpescha/react-chart'
+    },
+    {
+      index: 4,  
+      name: "Trading Bot",
+      tags: [' Back End', ' PIL', ' Numpy', ' Pandas'],
+      link: 'https://github.com/ChrisSpescha/react-chart'
+      }
+  ]
+  const [projects, setProjects] = useState(() => defProjects)
 
-
-class Filter extends React.Component {
-    constructor(props) {
-      super(props);
+  function filterTag(userTag) {
+    let taggedProjects = []
+    for (const element of projects) {
+      for (const tag of element.tags) {
+        if (userTag.toLowerCase() === tag.toLowerCase()) {
+          taggedProjects.push(element)
+        } 
+      }
     }
-    render() {
-      return (
-        <ul>
+    return taggedProjects;
+  } 
+
+  const resetState = () => {
+    setProjects(defProjects);
+  };
+
+
+  const handleClick = (event, param) => {
+    event.preventDefault();
+    setProjects(filterTag(param))
+  }
+
+  return (
+    // parent div to hold the ul and li's
+    <>
+    <div className="App">
+      <button onClick={event => handleClick(event, " Front End")}>Front End</button>
+      <button onClick={event => handleClick(event, " Back End")}>Back End</button>
+      <button onClick={resetState}>back</button>
+
+
+      <ul>
         {/* map over the users array */}
-        {this.props.projects.map((project) => (
+        {projects.map((project) => (
           // display a <div> element with the user.name and user.type
           // parent element needs to have a unique key
           <div key={project.id}>
-            <p >{project.name}</p>
-            <li >{project.tags}</li>
-            <li >{project.link}</li>
+            <p>{project.name}</p>
+            <li>{project.tags}</li>
+            <li>{project.link}</li>
             <br/>
           </div>
         ))}
       </ul>
-      )
-    }
-  }
-
-
-
-  class Portfolio extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            projects : [
-                {index: 0,
-                name: "Ecommerce Website",
-                tags: ['Python ', 'Flask ' , 'SQLAlchemy ', 'SQL ', 'HTML ', 'CSS '],
-                link: 'https://github.com/ChrisSpescha/EcommerceWebsite'
-                },
-                {
-                index: 1,
-                name: "Personal Website",
-                tags: ['Javascript', 'ReactJS', 'Material UI', 'React Router', 'HTML', 'CSS'],
-                link: 'https://github.com/ChrisSpescha/React_Web'
-                },
-                {
-                index: 2,  
-                name: "React Chart",
-                tags: ['Javascript', 'ReactJS', 'Axios', 'HTML', 'CSS'],
-                link: 'https://github.com/ChrisSpescha/react-chart'
-                }
-            ]
-        }
-        this.handleClick = this.handleClick.bind(this);
-    }
-    filterTag(userTag) {
-      let taggedProjects = []
-      for (const element of this.state.projects) {
-        for (const tag of element.tags) {
-          if (userTag.toLowerCase() === tag.toLowerCase()) {
-            taggedProjects.push(element)
-          } 
-        }
-      }
-      return taggedProjects;
-    } 
-
-    handleClick() {
-      console.log(this.state.projects)
-        this.setState({
-            projects: this.filterTag('ReactJS') 
-        });
-    }
-
-    render() {
-      return (
-        <>
-      <div className="container porfolio-page text-zone">
-          <button onClick={this.handleClick}>Play Again</button>
-          { /* change code below this line */ }
-          <Filter projects={this.state.projects} />
-          { /* change code above this line */ }
       </div>
       </>
-      );
-      }   
-}
+  );
+};
+export default App; 
 
-export default Portfolio;
+
+
+
+  // function decrementCount() {
+  //   setState(prevState =>{
+  //     return {count: prevState.count -1}
+  //   })
+  // }
+
+  // function incrementCount() {
+  //   setState(prevState =>{
+  //     return { ...prevState, count: prevState.count -1}
+  //   })
+  // }
+
