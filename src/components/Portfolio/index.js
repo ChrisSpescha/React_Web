@@ -1,32 +1,19 @@
 import React, { useState } from 'react'
+import {Button, Card, CardActions, CardContent, CardMedia, Typography, Grid, Paper, Box} from '@mui/material'
+import { styled } from '@mui/material/styles';
+import defProjects from './works'
 import './index.scss'
 
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#1A2027',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
 function App() {
-  const defProjects = [
-    {index: 1,
-    name: "Ecommerce Website",
-    tags: [' Front End', ' Back End',' Python', ' Flask', ' SQLAlchemy', ' SQL', ' HTML', ' CSS'],
-    link: 'https://github.com/ChrisSpescha/EcommerceWebsite'
-    },
-    {
-    index: 2,
-    name: "Personal Website",
-    tags: [' Front End',' Javascript', ' ReactJS', ' Material UI', ' React Router', ' HTML', ' CSS'],
-    link: 'https://github.com/ChrisSpescha/React_Web'
-    },
-    {
-    index: 3,  
-    name: "React Chart",
-    tags: [' Front End',' Javascript', ' ReactJS', ' Axios', ' HTML', ' CSS'],
-    link: 'https://github.com/ChrisSpescha/react-chart'
-    },
-    {
-      index: 4,  
-      name: "Trading Bot",
-      tags: [' Back End', ' PIL', ' Numpy', ' Pandas'],
-      link: 'https://github.com/ChrisSpescha/react-chart'
-      }
-  ]
+
   const [projects, setProjects] = useState(() => defProjects)
 
   function filterTag(userTag) {
@@ -52,48 +39,43 @@ function App() {
   }
 
   return (
-    // parent div to hold the ul and li's
     <>
-    <div className="container portfolio-page">
-      <div className="text-zone">
+    
+ 
+      <div className="container portfolio-page">
+      <div className='tab-zone'>
+          <Button variant="outlined" onClick={event => handleClick(event, " Front End")}>
+          Front End
+          </Button>
+          <Button variant="outlined" onClick={event => handleClick(event, " Back End")}>
+          Back End
+          </Button>
+          <Button variant="text" onClick={resetState}>
+          clear
+          </Button>
+        </div>
+            <div className="text-zone">
+            <Box sx={{ width: 1 }}>
+                <Box display="grid" gridTemplateColumns="repeat(12, 2fr)" gap={2} columns={8}>
+                  {projects.map((project) => (
+                                        <>
 
-      <button onClick={event => handleClick(event, " Front End")}>Front End</button>
-      <button onClick={event => handleClick(event, " Back End")}>Back End</button>
-      <button onClick={resetState}>back</button>
+                  <Box gridColumn="span 6">
+                    <Item>{project.name}</Item>
+                  </Box>
+                  <Box gridColumn="span 6">
+                    <Item>xs=4</Item>
+                  </Box>
+                 
+                  </>
 
-
-      <ul>
-        {/* map over the users array */}
-        {projects.map((project) => (
-          // display a <div> element with the user.name and user.type
-          // parent element needs to have a unique key
-          <div key={project.id}>
-            <p>{project.name}</p>
-            <li>{project.tags}</li>
-            <li>{project.link}</li>
-            <br/>
-          </div>
-        ))}
-      </ul>
+                    ))}
+              </Box>
+            </Box>
+            </div>
       </div>
-      </div>
-      </>
+    </>
   );
-};
+}
+
 export default App; 
-
-
-
-
-  // function decrementCount() {
-  //   setState(prevState =>{
-  //     return {count: prevState.count -1}
-  //   })
-  // }
-
-  // function incrementCount() {
-  //   setState(prevState =>{
-  //     return { ...prevState, count: prevState.count -1}
-  //   })
-  // }
-

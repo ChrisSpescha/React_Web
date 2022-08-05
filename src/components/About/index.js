@@ -42,22 +42,7 @@ const About = () => {
                     utilize those skills to work independently and collaboratively create,
                     innovate and sustain in a new field.
                 </p>
-                <Grid item xs={12} md={3} component={Card}>
-                    <CardContent className="project-card">
-                    <Typography color="textSecondary" gutterBottom >
-                        Ecommerce Website
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                        <a href="https://github.com/ChrisSpescha/EcommerceWebsite">Source</a>
-                    </Typography>
-                    <Typography>
-                        tools used
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                        work
-                    </Typography>
-                    </CardContent>
-                </Grid>
+                
             </div>
 
             <div className="stage-cube-cont">
