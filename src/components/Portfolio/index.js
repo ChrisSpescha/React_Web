@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import './index.scss'
+
 function App() {
   const defProjects = [
     {index: 1,
@@ -52,7 +54,9 @@ function App() {
   return (
     // parent div to hold the ul and li's
     <>
-    <div className="App">
+    <div className="container portfolio-page">
+      <div className="text-zone">
+
       <button onClick={event => handleClick(event, " Front End")}>Front End</button>
       <button onClick={event => handleClick(event, " Back End")}>Back End</button>
       <button onClick={resetState}>back</button>
@@ -71,6 +75,7 @@ function App() {
           </div>
         ))}
       </ul>
+      </div>
       </div>
       </>
   );
