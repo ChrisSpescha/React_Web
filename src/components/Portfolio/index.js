@@ -1,81 +1,77 @@
-import React, { useState } from 'react'
-import {Button, Card, CardActions, CardContent, CardMedia, Typography, Grid, Paper, Box} from '@mui/material'
-import { styled } from '@mui/material/styles';
-import defProjects from './works'
+import React from 'react'
+// import {Button, Card, CardActions, CardContent, CardMedia, Typography, Grid, Paper, Box} from '@mui/material'
+// import { styled } from '@mui/material/styles';
+// import defProjects from './works'
 import './index.scss'
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#1A2027',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+function UserGreeting() {
+  return <h1>Welcome back!</h1>;
+}
 
-function App() {
+function GuestGreeting() {
+  return <h1>Please sign up.</h1>;
+}
 
-  const [projects, setProjects] = useState(() => defProjects)
-
-  function filterTag(userTag) {
-    let taggedProjects = []
-    for (const element of projects) {
-      for (const tag of element.tags) {
-        if (userTag.toLowerCase() === tag.toLowerCase()) {
-          taggedProjects.push(element)
-        } 
-      }
-    }
-    return taggedProjects;
-  } 
-
-  const resetState = () => {
-    setProjects(defProjects);
-  };
-
-
-  const handleClick = (event, param) => {
-    event.preventDefault();
-    setProjects(filterTag(param))
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
   }
+  return <GuestGreeting />;
+}
 
+function LoginButton(props) {
   return (
-    <>
-    
- 
-      <div className="container portfolio-page">
-      <div className='tab-zone'>
-          <Button variant="outlined" onClick={event => handleClick(event, " Front End")}>
-          Front End
-          </Button>
-          <Button variant="outlined" onClick={event => handleClick(event, " Back End")}>
-          Back End
-          </Button>
-          <Button variant="text" onClick={resetState}>
-          clear
-          </Button>
-        </div>
-            <div className="text-zone">
-            <Box sx={{ width: 1 }}>
-                <Box display="grid" gridTemplateColumns="repeat(12, 2fr)" gap={2} columns={8}>
-                  {projects.map((project) => (
-                                        <>
-
-                  <Box gridColumn="span 6">
-                    <Item>{project.name}</Item>
-                  </Box>
-                  <Box gridColumn="span 6">
-                    <Item>xs=4</Item>
-                  </Box>
-                 
-                  </>
-
-                    ))}
-              </Box>
-            </Box>
-            </div>
-      </div>
-    </>
+    <button onClick={props.onClick}>
+      Login
+    </button>
   );
 }
+
+function LogoutButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Logout
+    </button>
+  );
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {isLoggedIn: false};
+  }
+
+  handleLoginClick() {
+    this.setState({isLoggedIn: true});
+  }
+
+  handleLogoutClick() {
+    this.setState({isLoggedIn: false});
+  }
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />;
+    }
+
+    return (
+      <div className='portfolio-page'>
+        <div className='text-zone'>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+        </div>
+      </div>
+    );
+  }
+}
+
+
 
 export default App; 
