@@ -1,15 +1,14 @@
 import React from 'react'
-import {Button, Card, CardActions, CardContent, CardMedia, Typography, Grid, Paper, Box} from '@mui/material'
+import {Button, Card, CardActions, CardContent, CardMedia, Typography} from '@mui/material'
 import {allProjects, frontendProjects, backendProjects} from './works'
 import './index.scss'
 
 function Frontend() {
   return <>
-          <div className="App">
-          
+          <div className="text-go">
               {frontendProjects.map((project) => (
-                <div key={project.id}>
-                  <h1>{project.name}</h1>
+                <div key={project.index}>
+                  <h1 >{project.name}</h1>
                   <p>{project.tags}</p>
                   <p>{project.link}</p>
                   <br/>
@@ -22,11 +21,12 @@ function Frontend() {
 
 function Backend() {
   return  <>
+            <div className="text-go">
             <Card sx={{ maxWidth: 345 }}>
               <CardMedia
                 component="img"
                 height="70"
-                image="/static/images/cards/contemplative-reptile.jpg"
+                image="src/assets/images/logo3.png"
                 alt="green iguana"
               />
               <CardContent>
@@ -43,37 +43,34 @@ function Backend() {
                 <Button size="small">Learn More</Button>
               </CardActions>
             </Card>
+            </div>
           </>
 }
 
-function AllDisplay(props) {
-  return <>
-          <div className="App">
-          
-              {allProjects.map((project) => (
-                <div>
-                  <h1>{project.name}</h1>
-                  <p>{project.tags}</p>
-                  <p>{project.link}</p>
-                  <br/>
-                </div>
-              ))}
-            
-            
-
-          </div>
+function AllDisplay() {
+  return  <>
+            <div className='text-go'>
+                {allProjects.map((project) => (
+                  <div key={project.index}>
+                    <h1>{project.name}</h1>
+                    <p>{project.tags}</p>
+                    <p>{project.link}</p>
+                    <br/>
+                  </div>
+                ))}
+            </div>
           </>;
 }
 
 function Greeting(props) {
-  const display = props.display;
-  if (display === 0) {
-    return <AllDisplay key={display} />;
-  } else if (display === 1){
-    return <Frontend />
-  } else {
-  return <Backend />;
-}
+    const display = props.display;
+    if (display === 0) {
+      return <AllDisplay />;
+    } else if (display === 1){
+      return <Frontend />
+    } else {
+    return <Backend />;
+  }
 }
 
 function BackEndButton(props) {
@@ -128,7 +125,7 @@ class App extends React.Component {
     return (
       <>
       <div className='portfolio-page'>
-        <div className='tab-zone text-go'>
+        <div className='tab-zone'>
           <AllProjects onClick={this.handleAllClick}/>
           <BackEndButton onClick={this.handleFrontEndClick} />
           <FrontEndButton onClick={this.handleBackEndClick} />

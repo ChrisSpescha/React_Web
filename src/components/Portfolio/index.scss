@@ -2,16 +2,23 @@
   .text-zone {
     position: absolute;
     left: 10%;
-    top: 50%;
+    top: 20%;
     transform: translateY(-50%);
     width: 40%;
     max-height: 90%;
   }
 
+  .text-go {
+    display: inline-block;
+    position: fixed;
+    top: 20%;
+    animation: slideInRight; 
+    animation-duration: 1s;
+  }
   .tab-zone {
     position: fixed;
     left: 10%;
-    top: 5%;
+    top: 15%;
     transform: translateY(-50%);
     width: 40%;
     max-height: 90%;
